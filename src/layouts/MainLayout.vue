@@ -1,44 +1,65 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <!-- Ajustamos o "view" para que o top bar fique acima da sidebar -->
+  <q-layout view="hHh lpr lFf">
+    <!-- Top bar (azul claro) -->
+    <q-header elevated class="bg-[#0061BF] text-white">
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <!-- Logo e nome da empresa -->
+        <div class="flex items-center gap-2">
+          <!-- Logo menor -->
+          <img src="~assets/SGMW-2.jpg" alt="Logo" class="h-6 w-auto" />
+          <span class="text-xl font-bold">Empresa Fictícia</span>
+        </div>
 
-        <q-toolbar-title>
-          Quasar App
-        </q-toolbar-title>
+        <q-space />
 
-        <div>Quasar v{{ $q.version }}</div>
+        <!-- Nome do programador + ícone com espaçamento -->
+        <div class="flex items-center gap-4">
+          <span class="font-medium">NOME PROGRAMADOR</span>
+          <!-- Ícone redondo de usuário -->
+          <q-icon name="mdi-account-circle" size="24px" />
+        </div>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      show-if-above
-      bordered
-    >
+    <!-- Sidebar (azul escuro) -->
+    <q-drawer show-if-above side="left" bordered class="bg-[#0F1E47] text-white">
       <q-list>
-        <q-item-label
-          header
-        >
-          Essential Links
-        </q-item-label>
+        <!-- HOME (ícone quadradinhos) -->
+        <q-item clickable @click="navigate('home')" class="text-white">
+          <q-item-section avatar>
+            <q-icon name="mdi-view-dashboard" />
+          </q-item-section>
+          <q-item-section>Home</q-item-section>
+        </q-item>
 
-        <EssentialLink
-          v-for="link in linksList"
-          :key="link.title"
-          v-bind="link"
-        />
+        <!-- FAVORITOS (ícone de pessoas) -->
+        <q-item clickable @click="navigate('favorites')" class="text-white">
+          <q-item-section avatar>
+            <q-icon name="mdi-account-multiple" />
+          </q-item-section>
+          <q-item-section>Favoritos</q-item-section>
+        </q-item>
+
+        <!-- CATEGORIAS (ícone de caixa) -->
+        <q-item clickable @click="navigate('categories')" class="text-white">
+          <q-item-section avatar>
+            <q-icon name="mdi-package-variant" />
+          </q-item-section>
+          <q-item-section>Categorias</q-item-section>
+        </q-item>
+
+        <!-- SOBRE (ícone de timão) -->
+        <q-item clickable @click="navigate('about')" class="text-white">
+          <q-item-section avatar>
+            <q-icon name="mdi-ship-wheel" />
+          </q-item-section>
+          <q-item-section>Sobre</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
+    <!-- Área central (renderização das páginas) -->
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -46,57 +67,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import EssentialLink, { type EssentialLinkProps } from 'components/EssentialLink.vue';
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
-const linksList: EssentialLinkProps[] = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-  {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
-  }
-];
-
-const leftDrawerOpen = ref(false);
-
-function toggleLeftDrawer () {
-  leftDrawerOpen.value = !leftDrawerOpen.value;
+function navigate(routeName: string): void {
+  // Ignora a Promise retornada por router.push, evitando 'floating promise'
+  void router.push({ name: routeName })
 }
 </script>
