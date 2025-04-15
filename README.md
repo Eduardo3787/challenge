@@ -1,93 +1,134 @@
-#CHALLENGE
-##Este projeto consiste em uma aplicação SPA (Single-Page Application) desenvolvida com Quasar 2 (que internamente utiliza Vue 3 com Composition API e Vite). O objetivo é consumir a API do GIPHY e exibir GIFs, além de permitir favoritar, buscar e categorizar. Também inclui Pinia para gerenciamento de estado, Axios para requisições HTTP, LocalStorage (via plugin do Quasar) para persistir dados localmente, e Tailwind CSS para estilização.
-###Ferramentas e Dependências.
-###Quasar 2
-Framework que utiliza Vue 3 e Vite para criar SPAs e PWAs de forma rápida e moderna.
+###Challenge
+##Este projeto é uma SPA construída com Quasar 2 e Vue 3 (Composition API), utilizando Pinia para gerenciamento de estado, Axios para consumir a API do GIPHY, LocalStorage para persistência de dados e Tailwind CSS para estilização.
+###🛠️ Ferramentas e Dependências
 
-Vue 3 (Composition API)
-Biblioteca JavaScript para construir interfaces de usuário reativas.
 
-Pinia
-Gerenciamento de estado global, substituindo o Vuex.
 
-Axios
-Cliente HTTP para consumir a API do GIPHY.
+Quasar 2: Framework para construção de SPAs.
 
-LocalStorage (via plugin Quasar)
-Armazena favoritos localmente no navegador.
+Vue 3: Biblioteca para interfaces de usuário.
 
-Tailwind CSS
-Framework CSS utility-first para estilização responsiva e moderna.
+Pinia: Gerenciamento de estado global (substitui o Vuex).
 
-PostCSS
-Processador de CSS (utilizado internamente pelo Tailwind + autoprefixer).
+Axios: Cliente HTTP para acessar a API do GIPHY.
 
-TypeScript
-Superconjunto de JavaScript que adiciona tipagem estática.
+Tailwind CSS: Framework utility-first para estilos modernos.
 
-ESLint e Prettier (opcionais)
-Ferramentas para padronização e formatação de código.
+PostCSS e Autoprefixer: Processadores CSS para compatibilidade entre navegadores.
 
-@quasar/extras
-Pacote com ícones (Material Design Icons etc.) para uso nos componentes <q-icon>.
-###Como Executar
-Instale as dependências
-Na raiz do projeto:
+@quasar/extras: Ícones e outros extras (usado com mdi-v6).
+
+
+
+
+####Instalação:
 
 bash
 Copiar
 npm install
-Renomeie postcss.config.js para postcss.config.cjs (se ainda não fez).
+npm install -D tailwindcss postcss autoprefixer @tailwindcss/postcss
+npm install @quasar/extras
 
-Verifique que quasar.config.ts inclua:
 
-ts
+
+####📂 Estrutura de Pastas
+arduino
 Copiar
-extras: ['mdi-v6'],
-framework: {
-  iconSet: 'mdi-v6', // icones MDI
-  plugins: ['Notify', 'LocalStorage']
-}
-Execute o projeto:
+desafio/
+├── public/            // Arquivos estáticos (ex: favicon)
+├── src/
+│   ├── assets/        // Imagens (ex: SGMW.jpg para o logo)
+│   ├── boot/          // Boot files (ex: axios.ts)
+│   ├── components/    // Componentes Vue (GifCard.vue, ImageSelector.vue, etc.)
+│   ├── css/           // Arquivos de estilo: 
+│   │   ├── app.scss   // Diretivas Tailwind & personalizações
+│   │   └── quasar.variables.scss  // (Opcional) Variáveis customizadas
+│   ├── layouts/       // Layouts gerais (MainLayout.vue)
+│   ├── pages/         // Páginas (HomePage.vue, FavoritesPage.vue, CategoriesPage.vue, AboutPage.vue, etc.)
+│   ├── router/        // Rotas (index.ts e routes.ts)
+│   ├── stores/        // Stores do Pinia (giphy-store.ts, index.ts)
+│   ├── App.vue        // Componente raiz
+│   └── env.d.ts       // Declarações de tipos para arquivos .vue
+├── quasar.config.ts   // Configuração do Quasar
+├── postcss.config.cjs // Configuração do PostCSS (use .cjs para CommonJS)
+├── tailwind.config.js // Configuração do Tailwind CSS
+├── tsconfig.json      // Configuração do TypeScript
+├── package.json       // Dependências e scripts
+└── README.md          // Este arquivo
+####⚙️ Configuração Principal
+quasar.config.ts:
+Define os arquivos de CSS, boot (ex: axios) e extras (ícones MDI).
+
+Usa extras: ['mdi-v6'] e iconSet: 'mdi-v6' para ícones.
+
+postcss.config.cjs:
+Configurado com @tailwindcss/postcss e autoprefixer para processar o CSS.
+
+Caso use "type": "module", renomeie o arquivo para .cjs.
+
+tailwind.config.js:
+Define os locais onde as classes Tailwind serão buscadas.
+
+src/css/app.scss:
+Importa as diretivas do Tailwind e, opcionalmente, variáveis customizadas do Quasar.
+
+
+
+####📋 Funcionalidades
+HomePage.vue:
+
+Exibe GIFs trending e permite buscar GIFs na API do GIPHY.
+
+O usuário pode favoritar GIFs.
+
+FavoritesPage.vue:
+
+Lista os GIFs favoritados, com opção de remoção.
+
+CategoriesPage.vue:
+
+Exibe categorias pré-definidas; ao selecionar uma, mostra os GIFs correspondentes.
+
+AboutPage.vue:
+
+Apresenta informações sobre o desenvolvedor e o propósito do desafio.
+
+MainLayout.vue:
+
+Top bar azul-claro com o logo e o nome do desenvolvedor (com ícone de usuário).
+
+Sidebar azul-escuro exibindo os itens de menu com ícones.
+
+####💡 Como Executar
+Instale as dependências na raiz do projeto:
+
+bash
+Copiar
+npm install
+Inicie o servidor de desenvolvimento:
 
 bash
 Copiar
 quasar dev
-Isso iniciará o servidor de desenvolvimento (por padrão em http://localhost:9000).
-###Explicação Rápida dos Arquivos Principais
-src/boot/axios.ts
-Configura o Axios com a baseURL do GIPHY e injeta no app para ser acessível via $api.
+Ou:
 
-src/stores/giphy-store.ts
-Store Pinia responsável por buscar GIFs (trending e busca) e gerenciar lista de favoritos no LocalStorage.
-
-src/layouts/MainLayout.vue
-Layout principal com topbar (logo e nome do programador) e sidebar (menus Home, Favoritos, Categorias, Sobre).
-
-src/pages/
-
-HomePage.vue: Exibe GIFs trending e pesquisa.
-
-FavoritesPage.vue: Lista os favoritos salvos.
-
-CategoriesPage.vue: Lista categorias e exibe GIFs correspondentes.
-
-AboutPage.vue: Informações sobre o desenvolvedor.
-
-ErrorNotFound.vue: Página 404.
-
-src/css/app.scss
-Arquivo com diretivas do Tailwind (@tailwind base; @tailwind components; @tailwind utilities;).
-(Opcionalmente importa quasar.variables.scss para customizar variáveis do Quasar.)
-###Observações Finais
-API Key do GIPHY está configurada no arquivo src/boot/axios.ts na constante giphyApiKey.
-
-Ícones (por exemplo, mdi-home, mdi-heart, etc.) requerem que o quasar.config.ts tenha extras: ['mdi-v6'] e iconSet: 'mdi-v6'.
-
-Se quiser mudar cores e tamanhos de ícones, basta alterar as classes/estilos diretamente nos componentes (por exemplo, class="h-6 w-auto" na logo ou size="24px" nos ícones).
-
-Caso encontre erros de caminho ou de estilo, verifique se a pasta assets/ contém as imagens (por ex. SGMW.jpg ou WXZ.png) e se o nome do arquivo coincide com o src="~assets/....
-
-![CHALLENGG](https://github.com/user-attachments/assets/cd47bdf4-fe6f-4062-87ea-e4f1de19f8ea)
+bash
+Copiar
+npm run dev
+Acesse a aplicação pelo navegador (geralmente em http://localhost:9000).
 
 
+####👨‍💻 Resumo dos Principais Arquivos
+src/boot/axios.ts: Configuração global do Axios com a chave do GIPHY.
+
+![desafio](https://github.com/user-attachments/assets/2b262e7f-61dc-4bc0-8457-f6239619bdc4)
+
+
+
+src/stores/giphy-store.ts: Store para buscar e gerenciar GIFs.
+
+src/layouts/MainLayout.vue: Layout com top bar e sidebar com ícones.
+
+src/pages/: Várias páginas (Home, Favoritos, Categorias, Sobre, 404).
+
+src/css/app.scss: Importa Tailwind CSS.
