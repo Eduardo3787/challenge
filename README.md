@@ -58,11 +58,17 @@ Caso use "type": "module", renomeie o arquivo para .cjs.</p>
 O usuário pode favoritar GIFs.</p>
 ### FavoritesPage.vue:
 <p>Lista os GIFs favoritados, com opção de remoção.</p>
-### CategoriesPage.vue:
+
++ CategoriesPage.vue:
+  
 <p>Exibe categorias pré-definidas; ao selecionar uma, mostra os GIFs correspondentes.</p>
-### AboutPage.vue:
+
++ AboutPage.vue:
+  
 <p>Apresenta informações sobre o desenvolvedor e o propósito do desafio.</p>
-### MainLayout.vue:
+
++ MainLayout.vue:
+  
 <p>Top bar azul-claro com o logo e o nome do desenvolvedor (com ícone de usuário).
 
 Sidebar azul-escuro exibindo os itens de menu com ícones.</p>
