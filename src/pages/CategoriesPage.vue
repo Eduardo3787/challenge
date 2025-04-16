@@ -48,19 +48,19 @@ import { useQuasar } from 'quasar'
 const store = useGiphyStore()
 const $q = useQuasar()
 
-// Define o tipo de selectedCategory explicitamente
+
 const selectedCategory = ref<{ id: string; name: string } | null>(null)
 
-// Utilize o tipo GiphyGif em vez de any para categoryGifs
+
 const categoryGifs = ref<GiphyGif[]>([])
 
 const categories = store.categories
 
 async function selectCategory(cat: { id: string; name: string }) {
   selectedCategory.value = cat
-  // Usa a busca da store para procurar pelo nome da categoria
+  
   await store.searchGifs(cat.name)
-  // Atribui os resultados, garantindo o tipo GiphyGif[]
+  
   categoryGifs.value = store.searchResults as GiphyGif[]
 }
 

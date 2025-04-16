@@ -32,10 +32,10 @@
   const store = useGiphyStore()
   const $q = useQuasar()
   
-  // Computed para obter a lista de favoritos do store
+  
   const favorites = computed(() => store.favorites)
   
-  // Função para remover um favorito
+  
   const removeFavorite = (gifId: string) => {
     store.removeFavorite(gifId)
     $q.notify({

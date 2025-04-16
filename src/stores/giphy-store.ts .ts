@@ -61,7 +61,7 @@ export const useGiphyStore = defineStore('giphy', () => {
     saveFavorites()
   }
 
-  // Carrega favoritos ao iniciar a store
+  
   loadFavorites()
 
   return {

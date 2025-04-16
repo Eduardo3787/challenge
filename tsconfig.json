@@ -22,6 +22,6 @@
     "src/**/*.ts",
     "src/**/*.d.ts",
     "src/**/*.vue",
-    "quasar.config.ts"  // Adicione esta linha
+    "quasar.config.ts"  
   ]
 }

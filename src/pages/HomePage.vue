@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <h1 class="text-2xl font-bold mb-4">Título da página</h1>
-    <!-- Barra de pesquisa -->
+    
     <div class="mb-4">
       <q-input
         v-model="searchQuery"
@@ -13,7 +13,7 @@
 
     <q-btn label="Buscar" color="primary" @click="onSearch" />
 
-    <!-- Listagem de GIFs -->
+    
     <div class="grid grid-cols-2 gap-4 mt-4">
       <div
         v-for="gif in gifs"
@@ -43,10 +43,10 @@ import { useQuasar } from 'quasar'
 const store = useGiphyStore()
 const $q = useQuasar()
 
-// Campo de texto para pesquisa
+
 const searchQuery = ref('')
 
-// Carrega trending GIFs ao montar
+
 onMounted(async () => {
   await store.fetchTrending()
 })
