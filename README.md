@@ -1,6 +1,8 @@
 <h1>Challenge🚀</h1> 
 <p>Este projeto é uma SPA construída com Quasar 2 e Vue 3 (Composition API), utilizando Pinia para gerenciamento de estado, Axios para consumir a API do GIPHY, LocalStorage para persistência de dados e Tailwind CSS para estilização.</p>
+
 ## 🛠️ Ferramentas e Dependências
+
 + Quasar 2: Framework para construção de SPAs.
 + Vue 3: Biblioteca para interfaces de usuário.
 + Pinia: Gerenciamento de estado global (substitui o Vuex).
