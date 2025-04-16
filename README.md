@@ -88,6 +88,8 @@ Sidebar azul-escuro exibindo os itens de menu com ícones.</p>
 + src/pages/: Várias páginas (Home, Favoritos, Categorias, Sobre, 404).
 + src/css/app.scss: Importa Tailwind CSS.
 
+  ### Link para ve o site (challen.netlify.app)
+
 ![desafio](https://github.com/user-attachments/assets/e0362d0c-e92e-47f4-aeb4-c416e061a3df)
 
 
